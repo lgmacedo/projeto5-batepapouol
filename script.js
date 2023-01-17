@@ -43,7 +43,7 @@ function tratarSucessoMensagens(recebido){
     document.querySelector('main').innerHTML = "";
     for(let i=0; i<mensagem.length; i++){
         if(mensagem[i].type === "message"){
-            document.querySelector('main').innerHTML += `<div><span class="fontColorGrey">(${mensagem[i].time})</span>&nbsp;<span class="font700">${mensagem[i].from}</span>&nbsp;para&nbsp;<span class="font700">${mensagem[i].to}:&nbsp;</span>${mensagem[i].text}</div>`
+            document.querySelector('main').innerHTML += `<div><span class="fontColorGrey">(${mensagem[i].time})</span>&nbsp;<span class="font700">${mensagem[i].from}</span>&nbsp;para&nbsp;<span class="font700">${mensagem[i].to}</span>: ${mensagem[i].text}</div>`
         }else if(mensagem[i].type === "status"){
             document.querySelector('main').innerHTML += `<div class="bgCinza"><span class="fontColorGrey">(${mensagem[i].time})</span>&nbsp;<span class="font700">${mensagem[i].from}</span>&nbsp;${mensagem[i].text}</div>`
         }else if(mensagem[i].type === "private_message" && (mensagem[i].to === nomeUsuario || mensagem[i].from === nomeUsuario)){
@@ -61,6 +61,15 @@ function tratarErroMensagens(dados){
     console.log(dados);
 }
 
+function mensagemEnviada(){
+    document.querySelector('input').value = "";
+    buscaMensagens();
+}
+
+function mensagemNãoEnviada(){
+    window.location.reload();
+}
+
 function enviaMensagem(){
     const mensagem = document.querySelector('input').value;
     const msgObj = { 
@@ -69,8 +78,9 @@ function enviaMensagem(){
         text: mensagem,
         type: tipoMsg
     };
-    axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", msgObj);
-    document.querySelector('input').value = "";
+    const promessa = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", msgObj);
+    promessa.then(mensagemEnviada);
+    promessa.catch(mensagemNãoEnviada);
 }
 
 /* ============== SCRIPT DE FATO ================================================================= */

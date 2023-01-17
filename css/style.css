@@ -40,7 +40,7 @@ main{
 
 main > div{
     background-color: #FFFFFF;
-    padding: 8px 8px;
+    padding: 10px 8px;
     margin-bottom: 4px;
     min-height: 40px;
     display: flex;
@@ -48,8 +48,8 @@ main > div{
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
-    flex-wrap: wrap;
-    overflow-wrap: break-word;
+    display: inline-block;
+    width: 100%;
 }
 
 .font700{
