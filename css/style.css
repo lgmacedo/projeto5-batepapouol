@@ -4,7 +4,7 @@
 
 body{
     font-family: 'Roboto', sans-serif;
-    background-color: #E5E5E5;
+    background-color: #f3f3f3;
 }
 
 header{
@@ -35,6 +35,37 @@ header > ion-icon{
 main{
     margin-top: 80px;
     padding-top: 26px;
+    margin-bottom: 84px;
+}
+
+main > div{
+    background-color: #FFFFFF;
+    padding: 8px 8px;
+    margin-bottom: 4px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    flex-wrap: wrap;
+    overflow-wrap: break-word;
+}
+
+.font700{
+    font-weight: 700;
+}
+
+.fontColorGrey{
+    color: #AAAAAA;
+}
+
+.bgVermelho{
+    background-color: #FFDEDE;
+}
+
+.bgCinza{
+    background-color: #DCDCDC;
 }
 
 footer{
@@ -54,13 +85,24 @@ footer{
 footer > input{
     font-weight: 400;
     font-size: 18px;
-    font-style: italic;
     border: 0px solid #000000;
+    outline: none;
 }
 
 ::placeholder{
     color: #000000;
+    font-style: italic;
 }
+
+:-ms-input-placeholder {
+    color: #000000;
+    font-style: italic;
+  }
+  
+  ::-ms-input-placeholder {
+    color: #000000;
+    font-style: italic;
+  }
 
 footer > ion-icon{
     font-size: 30px;
