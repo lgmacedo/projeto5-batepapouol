@@ -1,17 +1,31 @@
 /* ============== USUÁRIO ================================================================================= */
+let nomeUsuario;
+let destinatario = "Todos";
+let tipoMsg = "message";
 
 function tratarSucessoUsuario(dados){
-    if (dados.status === 400){
-        perguntaNome();
-    }
+    console.log("Deu certo!!!");
+    console.log(dados);
+    setInterval(mantemOnline, 5000);
+}
+
+function mantemOnline(){
+    const Status = {name:nomeUsuario};
+    const promessa = axios.post("https://mock-api.driven.com.br/api/v6/uol/status", Status);
+}
+
+function tratarErroUsuario(dados){
+    console.log("Deu errado!!!");
+    console.log(dados);
+    perguntaNome();
 }
 
 function perguntaNome(){
-    const nomeUsuario = prompt("Insira o seu nome");
+    nomeUsuario = prompt("Insira o seu nome");
     const Usuario = {name:nomeUsuario};
     const promessa = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", Usuario);
     promessa.then(tratarSucessoUsuario);
-    promessa.catch(perguntaNome);
+    promessa.catch(tratarErroUsuario);
 }
 
 /* ============== MENSAGENS ================================================================================= */
@@ -32,7 +46,7 @@ function tratarSucessoMensagens(recebido){
             document.querySelector('main').innerHTML += `<div><span class="fontColorGrey">(${mensagem[i].time})</span>&nbsp;<span class="font700">${mensagem[i].from}</span>&nbsp;para&nbsp;<span class="font700">${mensagem[i].to}:&nbsp;</span>${mensagem[i].text}</div>`
         }else if(mensagem[i].type === "status"){
             document.querySelector('main').innerHTML += `<div class="bgCinza"><span class="fontColorGrey">(${mensagem[i].time})</span>&nbsp;<span class="font700">${mensagem[i].from}</span>&nbsp;${mensagem[i].text}</div>`
-        }else if(mensagem[i].type === "private_message"){
+        }else if(mensagem[i].type === "private_message" && (mensagem[i].to === nomeUsuario || mensagem[i].from === nomeUsuario)){
             document.querySelector('main').innerHTML += `<div class="bgVermelho"><span class="fontColorGrey">(${mensagem[i].time})</span>&nbsp;<span class="font700">${mensagem[i].from}</span>&nbsp;reservadamente para&nbsp;<span class="font700">${mensagem[i].to}</span>: ${mensagem[i].text} </div>`
         }
     }
@@ -47,5 +61,19 @@ function tratarErroMensagens(dados){
     console.log(dados);
 }
 
+function enviaMensagem(){
+    const mensagem = document.querySelector('input').value;
+    const msgObj = { 
+        from: nomeUsuario,
+        to: destinatario,
+        text: mensagem,
+        type: tipoMsg
+    };
+    axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", msgObj);
+    document.querySelector('input').value = "";
+}
+
+/* ============== SCRIPT DE FATO ================================================================= */
+perguntaNome();
 buscaMensagens();
 setInterval(buscaMensagens, 3000);
