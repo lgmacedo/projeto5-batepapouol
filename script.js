@@ -8,7 +8,7 @@ function tratarSucessoUsuario(dados){
     console.log("Deu certo!!!");
     console.log(dados);
     setInterval(mantemOnline, 5000);
-    document.querySelector('.entrada').classList.add('escondido');
+    document.querySelector('.entrada').remove();
     document.querySelector('header').classList.remove('escondido');
     document.querySelector('main').classList.remove('escondido');
     document.querySelector('footer').classList.remove('escondido');
