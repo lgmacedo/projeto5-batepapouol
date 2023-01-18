@@ -26,6 +26,8 @@ function mantemOnline(){
 function tratarErroUsuario(dados){
     console.log("Deu errado!!!");
     console.log(dados);
+    alert("Usuário já logado. Insira outro nome.");
+    document.querySelector('.entrada input').value = "";
 }
 
 function perguntaNome(){

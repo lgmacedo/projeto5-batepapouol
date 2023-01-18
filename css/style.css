@@ -40,7 +40,7 @@ body{
 
 ::placeholder{
     color: var(--c, #AEAEAE);
-    font-style: var(--f, normal)
+    font-style: var(--f, normal);
 }
 
 .entrada button{
