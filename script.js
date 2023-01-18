@@ -87,3 +87,11 @@ function enviaMensagem(){
 perguntaNome();
 buscaMensagens();
 setInterval(buscaMensagens, 3000);
+
+// configuração do Enviar Mensagem com Enter
+let input = document.querySelector('input');
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    enviaMensagem();
+  }
+});
