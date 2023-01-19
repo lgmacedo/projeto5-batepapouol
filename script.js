@@ -30,9 +30,9 @@ function tratarSucessoParticipantes(recebido){
     const participante = recebido.data;
     document.querySelector('.participantesOnline').innerHTML = "";
     for(let i = 0; i<participante.length; i++){
-        document.querySelector('.participantesOnline').innerHTML += `<div onclick="marcaDestinatario(this)" class="interiorParticipante"><ion-icon name="person-circle-sharp"></ion-icon>
+        document.querySelector('.participantesOnline').innerHTML += `<div data-test = "participant" onclick="marcaDestinatario(this)" class="interiorParticipante"><ion-icon name="person-circle-sharp"></ion-icon>
         <p>${participante[i].name}</p><div class="checkVerdeDestinatario escondido">
-        <ion-icon name="checkmark-sharp"></ion-icon></div></div>`
+        <ion-icon data-test = "check" name="checkmark-sharp"></ion-icon></div></div>`
     }
 }
 
@@ -75,11 +75,11 @@ function tratarSucessoMensagens(recebido){
     document.querySelector('main').innerHTML = "";
     for(let i=0; i<mensagem.length; i++){
         if(mensagem[i].type === "message"){
-            document.querySelector('main').innerHTML += `<div><span class="fontColorGrey">(${mensagem[i].time})</span>&nbsp;<span class="font700">${mensagem[i].from}</span>&nbsp;para&nbsp;<span class="font700">${mensagem[i].to}</span>: ${mensagem[i].text}</div>`
+            document.querySelector('main').innerHTML += `<div data-test="message"><span class="fontColorGrey">(${mensagem[i].time})</span>&nbsp;<span class="font700">${mensagem[i].from}</span>&nbsp;para&nbsp;<span class="font700">${mensagem[i].to}</span>: ${mensagem[i].text}</div>`
         }else if(mensagem[i].type === "status"){
-            document.querySelector('main').innerHTML += `<div class="bgCinza"><span class="fontColorGrey">(${mensagem[i].time})</span>&nbsp;<span class="font700">${mensagem[i].from}</span>&nbsp;${mensagem[i].text}</div>`
+            document.querySelector('main').innerHTML += `<div data-test="message" class="bgCinza"><span class="fontColorGrey">(${mensagem[i].time})</span>&nbsp;<span class="font700">${mensagem[i].from}</span>&nbsp;${mensagem[i].text}</div>`
         }else if(mensagem[i].type === "private_message" && (mensagem[i].to === nomeUsuario || mensagem[i].from === nomeUsuario)){
-            document.querySelector('main').innerHTML += `<div class="bgVermelho"><span class="fontColorGrey">(${mensagem[i].time})</span>&nbsp;<span class="font700">${mensagem[i].from}</span>&nbsp;reservadamente para&nbsp;<span class="font700">${mensagem[i].to}</span>: ${mensagem[i].text} </div>`
+            document.querySelector('main').innerHTML += `<div data-test="message" class="bgVermelho"><span class="fontColorGrey">(${mensagem[i].time})</span>&nbsp;<span class="font700">${mensagem[i].from}</span>&nbsp;reservadamente para&nbsp;<span class="font700">${mensagem[i].to}</span>: ${mensagem[i].text} </div>`
         }
     }
     document.querySelector('main').innerHTML += `<aside><aside>`;

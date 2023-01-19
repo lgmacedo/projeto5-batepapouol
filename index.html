@@ -19,21 +19,25 @@
     </div>
     <header class="escondido">
         <img src="./img/logo.png" alt="UOL-logo">
-        <ion-icon onclick="abreParticipantes()" name="people"></ion-icon>
+        <button data-test = "open-participants" onclick="abreParticipantes()">
+            <ion-icon name="people"></ion-icon>
+        </button>
     </header>
     <main class="escondido">
     </main>
     <footer class="escondido">
         <div class="escrevaETextoInf">
-            <input type="text" placeholder="Escreva aqui...">
-            <div class="textoInf">Enviando para Todos</div>
+            <input data-test="input-message" type="text" placeholder="Escreva aqui...">
+            <div data-test="recipient" class="textoInf">Enviando para Todos</div>
         </div>
-        <ion-icon onclick="enviaMensagem()" name="paper-plane-outline"></ion-icon>
+        <button data-test="send-message" onclick="enviaMensagem()">
+            <ion-icon name="paper-plane-outline"></ion-icon>
+        </button>
     </footer>
-    <div onclick = "fechaParticipantes()" class="overlayPreto escondido"></div>
+    <div data-test="overlay" onclick = "fechaParticipantes()" class="overlayPreto escondido"></div>
     <div class="participantesBranco escondido">
         <p class="escolheContato">Escolha um contato para enviar mensagem:</p>
-        <div class="Todos" onclick="marcaDestinatario(this)">
+        <div class="Todos" data-test = "all" onclick="marcaDestinatario(this)">
             <ion-icon name="people"></ion-icon>
             <p>Todos</p>
             <div class="checkVerdeDestinatario">
@@ -44,18 +48,18 @@
              
         </div>
         <p class="escolheVisibilidade">Escolha a visibilidade:</p>
-        <div class="publico" onclick="marcaVisibilidade(this)">
+        <div data-test = "public" class="publico" onclick="marcaVisibilidade(this)">
             <ion-icon name="lock-open"></ion-icon>
             <p>Público</p>
             <div class="checkVerdeVisibilidade">
-                <ion-icon name="checkmark-sharp"></ion-icon>
+                <ion-icon data-test = "check" name="checkmark-sharp"></ion-icon>
             </div>
         </div>
-        <div class="reservadamente" onclick="marcaVisibilidade(this)">
+        <div data-test = "private" class="reservadamente" onclick="marcaVisibilidade(this)">
             <ion-icon name="lock-closed"></ion-icon>
             <p>Reservadamente</p>
             <div class="checkVerdeVisibilidade escondido">
-                <ion-icon name="checkmark-sharp"></ion-icon>
+                <ion-icon data-test = "check" name="checkmark-sharp"></ion-icon>
             </div>
         </div>
     </div>
