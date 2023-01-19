@@ -132,7 +132,21 @@ footer{
     left: 0;
 }
 
-footer > input{
+.escrevaETextoInf{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 5px;
+}
+
+.textoInf{
+    font-weight: 300;
+    font-size: 14px;
+    color: #505050;
+    padding-left: 3px;
+}
+
+footer input{
     font-weight: 400;
     font-size: 18px;
     border: 0px solid #000000;
@@ -142,4 +156,91 @@ footer > input{
 footer > ion-icon{
     font-size: 30px;
     cursor: pointer;
+}
+
+.overlayPreto{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.participantesBranco{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 259px;
+    height: 100%;
+    background-color: #FFFFFF;
+    z-index: 2;
+}
+
+.escolheContato, .escolheVisibilidade{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18.75px;
+    max-width: 170px;
+    margin: 22px auto;
+    color: #000000;
+    text-align: center;
+}
+
+.Todos, .publico, .reservadamente{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 18px;
+}
+
+.Todos{
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.participantesOnline{
+    display: flex;
+    flex-direction: column;
+    margin-left: 18px;
+    row-gap: 5px;
+}
+
+.interiorParticipante{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.publico{
+    position: relative;
+}
+
+.reservadamente{
+    margin-top: 10px;
+    position: relative;
+}
+
+.Todos ion-icon, .participantesOnline ion-icon, .publico ion-icon, .reservadamente ion-icon{
+    font-size: 24px;
+
+}
+
+.Todos p, .participantesOnline p, .publico p, .reservadamente p{
+    margin-left: 8px;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.checkVerdeVisibilidade, .checkVerdeDestinatario{
+    position: absolute;
+    bottom: 2px;
+    right: 25px;
+}
+
+.checkVerdeVisibilidade ion-icon, .checkVerdeDestinatario ion-icon{
+    color: #28BB25;
+    font-size: 20px;
 }

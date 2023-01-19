@@ -2,8 +2,9 @@
 let nomeUsuario;
 let destinatario = "Todos";
 let tipoMsg = "message";
+let participantesOnline = [];
 
-/* ============== USUÁRIO ================================================================================= */
+/* ============== USUÁRIOS ================================================================================= */
 function tratarSucessoUsuario(dados){
     console.log("Deu certo!!!");
     console.log(dados);
@@ -14,8 +15,25 @@ function tratarSucessoUsuario(dados){
     document.querySelector('footer').classList.remove('escondido');
     buscaMensagens();
     setInterval(buscaMensagens, 3000);
+    buscaParticipantes();
+    setInterval(buscaParticipantes, 10000);
     document.querySelector('footer input').style.setProperty("--c", "black");
     document.querySelector('footer input').style.setProperty("--f", "italic");
+}
+
+function buscaParticipantes(){
+    const promessa = axios.get("https://mock-api.driven.com.br/api/v6/uol/participants");
+    promessa.then(tratarSucessoParticipantes);
+}
+
+function tratarSucessoParticipantes(recebido){
+    const participante = recebido.data;
+    document.querySelector('.participantesOnline').innerHTML = "";
+    for(let i = 0; i<participante.length; i++){
+        document.querySelector('.participantesOnline').innerHTML += `<div onclick="marcaDestinatario(this)" class="interiorParticipante"><ion-icon name="person-circle-sharp"></ion-icon>
+        <p>${participante[i].name}</p><div class="checkVerdeDestinatario escondido">
+        <ion-icon name="checkmark-sharp"></ion-icon></div></div>`
+    }
 }
 
 function mantemOnline(){
@@ -96,6 +114,45 @@ function enviaMensagem(){
     promessa.then(mensagemEnviada);
     promessa.catch(mensagemNãoEnviada);
 
+}
+
+/* ============== PARTICIPANTES ATIVOS ================================================================= */
+function abreParticipantes(){
+    document.querySelector('.overlayPreto').classList.remove('escondido');
+    document.querySelector('.participantesBranco').classList.remove('escondido');
+}
+
+function fechaParticipantes(){
+    document.querySelector('.overlayPreto').classList.add('escondido');
+    document.querySelector('.participantesBranco').classList.add('escondido');
+}
+
+function marcaVisibilidade(qual){
+    if(!(document.querySelector('.publico .checkVerdeVisibilidade').classList.contains('escondido')));
+        document.querySelector('.publico .checkVerdeVisibilidade').classList.add('escondido');
+    if(!(document.querySelector('.reservadamente .checkVerdeVisibilidade').classList.contains('escondido')));
+        document.querySelector('.reservadamente .checkVerdeVisibilidade').classList.add('escondido');
+    qual.querySelector('.checkVerdeVisibilidade').classList.remove('escondido');
+    if(qual.classList.contains('reservadamente')){
+        tipoMsg = "private_message";
+        document.querySelector('.textoInf').innerHTML = `Enviando para ${destinatario} (reservadamente)`
+    }else{
+        tipoMsg = "message"
+        document.querySelector('.textoInf').innerHTML = `Enviando para ${destinatario}`
+    }
+}
+
+function marcaDestinatario(qual){
+    const marcadoAnteriormente = document.querySelector('.checkVerdeDestinatario:not(.escondido)');
+    if(marcadoAnteriormente!==null){
+        marcadoAnteriormente.classList.add('escondido');
+    }
+    qual.querySelector('.checkVerdeDestinatario').classList.remove('escondido');
+    destinatario = qual.querySelector('p').innerHTML;
+    if(tipoMsg === "message")
+        document.querySelector('.textoInf').innerHTML = `Enviando para ${destinatario}`
+    if(tipoMsg === "private_message")
+        document.querySelector('.textoInf').innerHTML = `Enviando para ${destinatario} (reservadamente)`
 }
 
 /* ============== SCRIPT DE FATO ================================================================= */
