@@ -26,7 +26,11 @@ function mantemOnline(){
 function tratarErroUsuario(dados){
     console.log("Deu errado!!!");
     console.log(dados);
-    alert("Usuário já logado. Insira outro nome.");
+    if(dados.response.status===400){
+        alert("Usuário já logado. Insira outro nome");
+    }else{
+        alert("Erro. Tente novamente");
+    }
     document.querySelector('.entrada input').value = "";
 }
 
