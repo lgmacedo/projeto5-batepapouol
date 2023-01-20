@@ -44,6 +44,9 @@ function mantemOnline(){
 function tratarErroUsuario(dados){
     console.log("Deu errado!!!");
     console.log(dados);
+    document.querySelector('.carregando').classList.add('escondido');
+    document.querySelector('.entrada input').classList.remove('escondido');
+    document.querySelector('.entrada button').classList.remove('escondido');
     if(dados.response.status===400){
         alert("Usuário já logado. Insira outro nome");
     }else{
@@ -54,6 +57,9 @@ function tratarErroUsuario(dados){
 
 function perguntaNome(){
     nomeUsuario = document.querySelector('.entrada input').value;
+    document.querySelector('.carregando').classList.remove('escondido');
+    document.querySelector('.entrada input').classList.add('escondido');
+    document.querySelector('.entrada button').classList.add('escondido');
     const Usuario = {name:nomeUsuario};
     const promessa = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", Usuario);
     promessa.then(tratarSucessoUsuario);
