@@ -98,7 +98,6 @@ main > div{
     padding: 10px 8px;
     margin-bottom: 4px;
     min-height: 40px;
-    display: flex;
     align-items: center;
     font-weight: 400;
     font-size: 14px;
