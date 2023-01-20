@@ -154,13 +154,12 @@ function marcaVisibilidade(qual){
     if(!(checkReservado.classList.contains('escondido')));
         checkReservado.classList.add('escondido');
     qual.querySelector('.checkVerdeVisibilidade').classList.remove('escondido');
-    const mensagemInf = document.querySelector('.textoInf').innerHTML;
     if(qual.classList.contains('reservadamente')){
         tipoMsg = "private_message";
-        mensagemInf = `Enviando para ${destinatario} (reservadamente)`
+        document.querySelector('.textoInf').innerHTML = `Enviando para ${destinatario} (reservadamente)`
     }else{
         tipoMsg = "message"
-        mensagemInf = `Enviando para ${destinatario}`
+        document.querySelector('.textoInf').innerHTML = `Enviando para ${destinatario}`
     }
 }
 
@@ -171,11 +170,10 @@ function marcaDestinatario(qual){
     }
     qual.querySelector('.checkVerdeDestinatario').classList.remove('escondido');
     destinatario = qual.querySelector('p').innerHTML;
-    const mensagemInf = document.querySelector('.textoInf').innerHTML;
     if(tipoMsg === "message")
-        mensagemInf = `Enviando para ${destinatario}`
+        document.querySelector('.textoInf').innerHTML = `Enviando para ${destinatario}`
     if(tipoMsg === "private_message")
-        mensagemInf = `Enviando para ${destinatario} (reservadamente)`
+        document.querySelector('.textoInf').innerHTML = `Enviando para ${destinatario} (reservadamente)`
 }
 
 /* ============== SCRIPT DE FATO ================================================================= */
