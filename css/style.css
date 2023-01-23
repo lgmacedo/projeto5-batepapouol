@@ -192,6 +192,8 @@ footer ion-icon{
     height: 100%;
     background-color: #FFFFFF;
     z-index: 2;
+    overflow: scroll;
+    padding-bottom: 22px;
 }
 
 .escolheContato, .escolheVisibilidade{
